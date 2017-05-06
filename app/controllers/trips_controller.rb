@@ -5,7 +5,15 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+   @trips =
+    if params[:my_trips] == "true"
+      current_user.trips
+     else
+       Trip.all
+     end
+  end
+
+  def my_trips
   end
 
   # GET /trips/1
