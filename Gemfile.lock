@@ -303,7 +303,7 @@ DEPENDENCIES
   bourbon
   byebug
   capybara
-  carrierwave (~> 1.0)
+  carrierwave
   coffee-rails (~> 4.2)
   database_cleaner
   devise
@@ -314,7 +314,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   listen (~> 3.0.5)
-  mini_magick (~> 4.3)
+  mini_magick
   pg
   pry-rails
   pry-rescue

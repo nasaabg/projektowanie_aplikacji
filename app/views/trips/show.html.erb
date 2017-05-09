@@ -10,5 +10,10 @@
   <%= @trip.description %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+    <%= image_tag @trip.trip_images.first.image.url %>
+</p>
+
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>

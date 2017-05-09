@@ -33,8 +33,9 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.json
   def create
-    @trip = Trip.new(trip_params)
+    @trip = Trip.new(trip_params.except(:image))
     @trip.users << current_user
+    @trip.trip_images.build({image: trip_params[:image]})
 
     respond_to do |format|
       if @trip.save
@@ -79,6 +80,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:name, :description)
+      params.require(:trip).permit(:name, :description, :image)
     end
 end
