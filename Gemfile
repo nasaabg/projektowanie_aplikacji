@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'exif'
+gem 'geokit-rails'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
