@@ -1,4 +1,5 @@
 class ReadPhotoCoordinates < Struct.new(:photo_path)
+
   def self.call(photo_path)
     new(photo_path).call
   end
