@@ -16,6 +16,7 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'exif'
 gem 'geokit-rails'
+gem "figaro"
 group :development, :test do
   gem 'byebug', platform: :mri
 end
