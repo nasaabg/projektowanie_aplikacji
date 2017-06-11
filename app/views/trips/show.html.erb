@@ -14,6 +14,9 @@
   <strong>Image:</strong>
     <%= image_tag @trip.trip_images.first.image.url %>
 </p>
+<p>
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?markers=#{@trip.trip_images_coords_str}&zoom=9&size=640x400&key=#{ENV["google_api"]}" %>
+</p>
 
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>
