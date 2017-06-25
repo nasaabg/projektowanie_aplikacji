@@ -1,22 +1,67 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @trip.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @trip.description %>
-</p>
 
-<p>
-  <strong>Image:</strong>
-    <%= image_tag @trip.trip_images.first.image.url %>
-</p>
-<p>
-<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?markers=#{@trip.trip_images_coords_str}&zoom=9&size=640x400&key=#{ENV["google_api"]}" %>
-</p>
+<!-- Page Content -->
+<div class="container">
 
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="pull-right">
+        <%= link_to 'Edit', edit_trip_path(@trip) %> |
+        <%= link_to 'Back', trips_path %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Item Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header"><%= @trip.name %>
+      <small><%= truncate(@trip.description) %></small>
+      </h1>
+    </div>
+  </div>
+
+  <!-- /.row -->
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+
+    <div class="col-md-8">
+      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?markers=#{@trip.trip_images_coords_str}&zoom=9&size=750x400&key=#{ENV["google_api"]}" %>
+    </div>
+
+    <div class="col-md-4">
+      <h3>Trip Description</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+      <h3>People</h3>
+      <ul>
+        <% @trip.users.each do |user| %>
+          <li><%= user.name %></li>
+        <% end %>
+          <li>Tomek</li>
+          <li>Olek</li>
+      </ul>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+  <!-- Related Projects Row -->
+  <div class="row">
+
+    <div class="col-lg-12">
+      <h3 class="page-header">Photos</h3>
+    </div>
+
+    <% @trip.trip_images.each do |image| %>
+      <div class="col-sm-3 col-xs-6">
+        <%= image_tag image.image.url %>
+      </div>
+    <% end %>
+
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container -->
