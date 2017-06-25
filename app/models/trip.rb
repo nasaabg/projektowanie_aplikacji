@@ -10,4 +10,10 @@ class Trip < ApplicationRecord
   def trip_images_coords_str
     trip_images_coords.map { |x| x.join(",") if x.any?}.compact.join("|")
   end
+
+  def images_coors_for_google
+    trip_images_coords.map do |coords|
+      {lat: coords.first, lng: coords.last}
+    end
+  end
 end

@@ -29,7 +29,7 @@
   <div class="row">
 
     <div class="col-md-8">
-      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?markers=#{@trip.trip_images_coords_str}&zoom=9&size=750x400&key=#{ENV["google_api"]}" %>
+<div id="map"></div>
     </div>
 
     <div class="col-md-4">
@@ -40,8 +40,8 @@
         <% @trip.users.each do |user| %>
           <li><%= user.name %></li>
         <% end %>
-          <li>Tomek</li>
-          <li>Olek</li>
+        <li>Tomek</li>
+        <li>Olek</li>
       </ul>
     </div>
 
@@ -65,3 +65,36 @@
   <!-- /.row -->
 </div>
 <!-- /.container -->
+
+<script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: <%= raw @trip.images_coors_for_google.first.to_json %>
+  });
+
+  // Create an array of alphabetical characters used to label the markers.
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // Add some markers to the map.
+  // Note: The code uses the JavaScript Array.prototype.map() method to
+  // create an array of markers based on a given "locations" array.
+  // The map() method here has nothing to do with the Google Maps API.
+  var markers = locations.map(function(location, i) {
+    return new google.maps.Marker({
+      position: location,
+      label: labels[i % labels.length]
+    });
+  });
+
+  // Add a marker clusterer to manage the markers.
+  var markerCluster = new MarkerClusterer(map, markers,
+      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+}
+var locations = <%= raw @trip.images_coors_for_google.to_json %>
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["google_api"] %>&callback=initMap">
+</script>
