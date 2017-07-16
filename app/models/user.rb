@@ -11,6 +11,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :trip_users
+  has_many :trip_users, dependent: :destroy
   has_many :trips, through: :trip_users
 end
